@@ -1,0 +1,30 @@
+/*Print styles*/
+/* Author: JoAnn Weaver */
+/* Date: 11/15/2017 */
+
+/* hides elements */
+
+nav, header {
+  display: none;
+}
+@page {
+  size: 8.5in 11in;
+  margin: 0.5in;
+}
+/* print designed for accessibility */
+ 
+body {
+  color: black;
+  background-color: white;
+  background-image: none;
+  font-size: 12pt;
+  font-family: "Times New Roman", Times, serif;
+  line-height: 120%;
+}
+/* sets links to default colors */
+ 
+a {
+  text-decoration: underline;
+  color: blue;
+}
+

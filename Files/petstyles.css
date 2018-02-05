@@ -1,0 +1,90 @@
+	/*
+      Final Pets To Go stylesheet
+      Your Name:JoAnn Weaver
+      Today's Date:11/8/2017
+    */
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*body styles*/	
+body {
+  background-color: #E8E8E8;  
+  color: black;
+  font-size: 1.1em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+  width: 90%;
+  border-width: 1px;
+  margin: 10px auto;
+  background-color: #606060; 
+}
+
+p {
+  margin: 0 30px;
+}
+
+.center {
+  text-align: center;
+}
+
+/*header styles*/
+header {
+  margin-bottom: 0;
+  background-color: #333333;
+}
+
+header p img {
+  display: inline;
+  margin: 0 30px;
+  vertical-align: middle;
+}
+
+header p {
+  color: white;
+  font-size: 3em;
+}
+
+#title {						/*title in headers*/
+  margin-left: 20%;
+}
+
+/*nav bar style*/
+nav {
+  padding-left: 25%;
+  margin-top: -21px;
+  background-color: aqua;
+}
+
+nav ul li {
+  display: inline;
+  list-style-type: none;	
+}
+
+nav li a {
+  padding: 3em;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  color: #9c4be7;
+  text-decoration: underline;
+}
+
+/*footer styles*/
+footer {
+  margin-top: 1em;
+  padding: 20px;
+  border-top: solid thin black;
+  border-bottom: solid thin black;
+  clear: both;
+  color: white;
+  font: bold 1.75em Gigi, script;
+  text-align: center;
+}
