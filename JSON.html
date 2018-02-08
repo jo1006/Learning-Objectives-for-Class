@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<title>JoAnn Weaver JSON</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <body>
+	<header>
+	  <p>JSON examples</p>
+	</header>
+	
+	<p id="putHere"></p>
+	<script>
+	function myFunction(){  //set up JSON
+      var pets = [{"name" : "Sophie" , "type" : "cat" , "age" : "2" , "color" : "ragdoll"},
+		  		  {"name" : "Bunny" , "type" : "cat" , "age" : "2" , "color" : "white tabby"},
+				  {"name" : "Josie" , "type" : "cat" , "age" : "4" , "color" : "tabby"},
+				  {"name" : "Zoe" , "type" : "dog" , "age" : "7" , "color" : "silver/black"}
+				 ];
+	    
+		//JSON as array of objects in console
+	  document.getElementById("putHere").innerHTML = "JSON as an array of objects is in console.<br><br>";
+	  console.log(pets);
+		
+		//JSON to string for use between languages or sent to/from server
+      var petsObj = JSON.stringify(pets);
+	  document.getElementById("putHere").innerHTML += "JSON as a string:<br>"  + petsObj;
+	    
+		//JSON parsed back to an object
+	  document.getElementById("putHere").innerHTML += "<br><br>String parsed back as a JSON in the console again.";
+	  console.log(JSON.parse(petsObj));
+		
+		//JSON change name in first element
+	  document.getElementById("putHere").innerHTML += "<br><br>Change name in first array element. <br>Was: " + pets[0].name;
+	  pets[0].name = "Tasha";
+	  document.getElementById("putHere").innerHTML += " Now: " + pets[0].name + "<br><br>";
+		
+		//JSON find oldest pet and display name and age
+	  document.getElementById("putHere").innerHTML += "Find oldest pet in JSON and display name and age.<br>";
+	  var maxAge = 0;
+	  var maxName;
+	  for(var i=0; i<pets.length; i++){
+		if(parseInt(pets[i].age) > maxAge){
+			maxAge = pets[i].age;
+			maxName = pets[i].name;
+		}
+	  }
+	  document.getElementById("putHere").innerHTML += "The oldest pet is " + maxAge + " and her name is " + maxName + ".<br><br>";
+	 
+		/*need to learn ajax to pull the json file and do something with it
+	  $.ajax({
+		  dataType:"json";
+		  url:"http://www.joannw.com/CIS175/Objectives/data.json";
+		  
+		
+	  $.getJSON(
+	    "http://www.joannw.com/CIS175/Objectives/data.json", {
+		  format: "json"
+		})
+		.done(function(json){
+		  document.getElementById("putHere").innerHTML += "JSON from file on the web shown in console.<br>";
+		  console.log(json);
+		})
+		.fail(function(){
+		  console.log("failed pull of JSON file");
+		})
+	  
+	  
+		//pull JSON from web page
+	  request = new XMLHttpRequest();
+	  requestURL = "http://www.joannw.com/CIS175/Objectives/data.json";
+	  request.open('GET', requestURL);
+	  request.responseType = "json";
+	  request.send();
+	  request.onload = function(){
+		var person = request.response;
+		document.getElementById("putHere").innerHTML += "JSON from file on the web in console.<br>";
+		console.log(person);
+	  }
+	  */	  
+	};
+	
+	myFunction();	
+	</script>
+  </body>
+</html>
