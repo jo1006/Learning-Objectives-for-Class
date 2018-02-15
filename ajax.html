@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<title>JoAnn Weaver AJAX</title>
+<style>
+	.hide {
+		visibility: hidden;
+	}
+	.show {
+		visibility: visible;
+	}
+</style>
+
+<body>
+
+<h1>Ajax request</h1>
+
+<button id="resetBtn">Start over</button></br>
+
+<button id="petBtn">See 3 new pets to adopt</button>
+<div id="showPets"></div>
+
+<button id="ajaxBtn">Ajax - get 3 new pets</button>
+<div id="showAjaxPets"></div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script> 
+
+/*see fill text json to find json files
+see handlebars
+*/
+	var pageCounter = 1;
+	var ajaxCounter = 1;
+	var btn = document.getElementById("petBtn");
+	
+	$("#resetBtn").on("click", function(){
+		pageCounter = 1;
+		ajaxCounter = 1;
+		document.getElementById("showPets").innerHTML = "";
+		document.getElementById("showAjaxPets").innerHTML = "";
+		petBtn.classList.remove("hide"); 
+		petBtn.classList.add("show"); 
+		ajaxBtn.classList.remove("hide"); 
+		ajaxBtn.classList.add("show"); 
+	});
+	
+	btn.addEventListener("click", function() {
+
+		var httpReq = new XMLHttpRequest();  //browsers built in tool
+		var url = "https://learnwebcode.github.io/json-example/animals-" + pageCounter + ".json";
+		httpReq.open("GET", url);
+		
+		httpReq.onload = function(){
+			if (httpReq.status >= 200 && httpReq.status < 400){
+				var JSONdata = JSON.parse(httpReq.responseText); //need to tell it that data is json not a text file
+				displayOnScreen(JSONdata);
+			} else {
+				console.log("error after connecting to server");
+			};
+			
+		};
+		httpReq.onerror = function(){
+			console.log("Unable to get JSON data - connection error");
+		};
+		httpReq.send();
+		pageCounter++;
+		if (pageCounter > 3){  //tested with > 4 to test onload error
+			petBtn.classList.remove("show"); 
+			petBtn.classList.add("hide"); 
+			console.log("hide");
+		}
+	});
+	
+	function displayOnScreen(data){
+		var string = "";
+		//list name and species
+		for (var i=0; i<data.length; i++){
+			string += "<p>" + data[i].name + " is a " + data[i].species + " that likes ";
+			//list likes
+			for (var ii=0; ii<data[i].foods.likes.length; ii++){
+				if (ii == 0){
+					string += data[i].foods.likes[ii];
+				} else {
+					string += " and " + data[i].foods.likes[ii];
+				}
+			}
+			string += " and dislikes ";
+			for (var ii=0; ii<data[i].foods.dislikes.length; ii++){
+				if (ii == 0){
+					string += data[i].foods.dislikes[ii];
+				} else {
+					string += " and " + data[i].foods.dislikes[ii];
+				}
+			}
+			string += ".</p>";
+		}			
+		document.getElementById("showPets").innerHTML += string;
+	}
+	
+	//jquery ajax 
+	$("#ajaxBtn").on("click", function(){
+		
+		var ajaxString = "";
+		var url = "https://learnwebcode.github.io/json-example/animals-" + ajaxCounter + ".json";
+			$.ajax({
+				type: "GET",
+				url: url, 
+				datatype: "json",
+				success: function (data) {  //data is what is returned from server
+					$.each(data, function(index, element){
+						ajaxString = "<p>" + element.name + " is a " + element.species + "</p>";
+						document.getElementById("showAjaxPets").innerHTML += ajaxString;
+					});
+					ajaxCounter++;
+					console.log(ajaxCounter);
+				},
+				error: function (e) {
+					console.log(e.message);
+				}
+			});
+		if (ajaxCounter == 3) {
+			ajaxBtn.classList.remove("show"); 
+			ajaxBtn.classList.add("hide"); 
+		};	
+		
+	});
+	
+</script>
+
+</body>
+</html>
